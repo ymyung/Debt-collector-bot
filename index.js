@@ -64,6 +64,15 @@ function formatMoney(amountCents) {
 client.on("interactionCreate", async interaction => {
   if (!interaction.isChatInputCommand()) return;
 
+  const allowedChannelId = process.env.ALLOWED_CHANNEL_ID;
+
+  if (interaction.channelId !== allowedChannelId) {
+    return await interaction.reply({
+      content: `Please use this bot in <#${allowedChannelId}>.`,
+      flags: MessageFlags.Ephemeral
+    });
+  }
+
  
     switch (interaction.commandName){
         case "adddebt": {
@@ -224,7 +233,7 @@ client.once("clientReady", () => {
     }
 
     for (const debt of unpaidDebts) {
-      const channel = await client.channels.fetch(debt.channel_id);
+      const channel = await client.channels.fetch(process.env.ALLOWED_CHANNEL_ID);
 
       await channel.send(
         `<@${debt.debtor_id}> reminder: you still owe <@${debt.creditor_id}> ${formatMoney(debt.amount_cents)} for ${debt.reason}.`
