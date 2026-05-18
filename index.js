@@ -153,7 +153,7 @@ client.on("interactionCreate", async interaction => {
             }
             const debtMessage = unpaidDebts
                 .map(debt => {
-                    return `Debt #${debt.id}: <@${debt.debtor_id}> owes <@${debt.creditor_id}> $${formatMoney(debt.amount_cents)} for ${debt.reason}`;
+                    return `Debt #${debt.id}: <@${debt.debtor_id}> owes <@${debt.creditor_id}> ${formatMoney(debt.amount_cents)} for ${debt.reason}`;
                 })
                 .join("\n")
 
