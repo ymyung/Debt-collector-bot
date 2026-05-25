@@ -236,7 +236,7 @@ client.once("clientReady", () => {
       const channel = await client.channels.fetch(process.env.ALLOWED_CHANNEL_ID);
 
       await channel.send(
-        `<@${debt.debtor_id}> reminder: you still owe <@${debt.creditor_id}> ${formatMoney(debt.amount_cents)} for ${debt.reason}.`
+        `<@${debt.debtor_id}> reminder: you still owe <@${debt.creditor_id}> ${formatMoney(debt.amount_cents)} for ${debt.reason}. Debt id: ${debt.id}.`
       );
     }
   }, 24 * 60 * 60 * 1000);
